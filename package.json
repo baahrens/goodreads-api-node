@@ -1,0 +1,31 @@
+{
+  "name": "goodreads-api-node",
+  "version": "0.0.1",
+  "description": "Node.js wrapper for the Goodreads web API",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel --presets es2015,stage-0 -d ./lib ./src/ && node test.js"
+  },
+  "author": "Bastian Ahrens",
+  "license": "MIT",
+  "dependencies": {
+    "oauth": "^0.9.15",
+    "query-string": "^4.3.1",
+    "request": "^2.79.0",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "keywords": [
+    "goodreads",
+    "web api",
+    "api",
+    "wrapper",
+    "api wrapper"
+  ]
+}
