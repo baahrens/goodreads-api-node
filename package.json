@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "homepage": "https://github.com/baahrens/goodreads-api-node",
   "description": "Node.js wrapper for the Goodreads web API",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "compile": "babel --presets es2015,stage-0 -d ./lib ./src/",
     "test": "mocha"

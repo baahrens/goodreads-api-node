@@ -1,9 +1,4 @@
 
-const xmlParser = new xml2js.Parser({
-  explicitArray: false,
-  mergeAttrs: true,
-});
-
 const Builder = function(){
   let responseKey, queryParams, port, path, oauth, access_token, access_token_secret;
 };
