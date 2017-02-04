@@ -471,12 +471,13 @@ const Goodreads = function(credentials, callbackURL) {
 
   /**
   * createComment
+  * TODO
   *
   * @access public
-  * @param {string} type TODO
-  * @param {string} id TODO
+  * @param {string} type
+  * @param {string} id
   * @param {string} comment comment to create
-  * @returns {promise} TODO
+  * @returns {promise}
   */
   function createComment(type, id, comment) {
 
@@ -1050,27 +1051,27 @@ const Goodreads = function(credentials, callbackURL) {
   };
 
   return {
-    initOAuth, //works
-    getRequestToken, //works
-    getAccessToken, //works
-    getBooksByAuthor, //works
-    getAuthorInfo, //works
-    getAllSeriesByAuthor, //works
-    getRecentStatuses, //works
-    getBooksOnUserShelf, //works
-    getUsersReviewForBook, //works
-    getUserStatus, //works
-    getUserInfo, //works
-    getRecentReviews, //works
-    getReview, //works
-    addBookToShelf, //works
-    getOwnedBooks, //works
-    searchBooks, //works
-    searchAuthors, //works
-    followAuthor, //works
-    unfollowAuthor, //works
-    showFollowing, //works
-    getUserFollowings, //works
+    initOAuth,
+    getRequestToken,
+    getAccessToken,
+    getBooksByAuthor,
+    getAuthorInfo,
+    getAllSeriesByAuthor,
+    getRecentStatuses,
+    getBooksOnUserShelf,
+    getUsersReviewForBook,
+    getUserStatus,
+    getUserInfo,
+    getRecentReviews,
+    getReview,
+    addBookToShelf,
+    getOwnedBooks,
+    searchBooks,
+    searchAuthors,
+    followAuthor,
+    unfollowAuthor,
+    showFollowing,
+    getUserFollowings,
   };
 };
 

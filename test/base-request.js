@@ -1,7 +1,7 @@
 const Request = require('../lib/base-request');
 const expect = require('chai').expect;
 
-describe("build requests", function() {
+describe("request builder", function() {
   it('should set path', function() {
     const req = Request.builder()
     .withPath('http://randomurl.com/path')
