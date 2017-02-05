@@ -411,7 +411,6 @@ const Goodreads = function(credentials, callbackURL) {
       const req = Request.builder()
       .withPath(path)
       .withQueryParams(options)
-      .withResponseKey('shelves')
       .build();
 
       RequestManager.get(req)
@@ -607,16 +606,16 @@ const Goodreads = function(credentials, callbackURL) {
   };
 
   /**
-  * getGroups
+  * getUsersGroups
   *
   * @access public
-  * @param {string} id group ID
+  * @param {string} id userID
   * @param {string} sort sort groups by
   * @returns {promise} returns groups if successful
   */
-  function getGroups(id, sort) {
+  function getUsersGroups(id, sort) {
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getGroups()', 'groupID'));
+      if (!id) reject(wrongParamsError('getUsersGroups()', 'groupID'));
 
       const path = `${URL}/group/list/${id}.xml`;
       const options = { key: KEY };
@@ -823,7 +822,6 @@ const Goodreads = function(credentials, callbackURL) {
     const req = Request.builder()
     .withPath(path)
     .withQueryParams(options)
-    .withResponseKey('read_status')
     .build();
 
     return RequestManager.get(req);
@@ -873,7 +871,6 @@ const Goodreads = function(credentials, callbackURL) {
 
   /**
   * getBooksOnUserShelf
-  * TODO
   *
   * @access public
   * @param {string} id user ID
@@ -894,7 +891,6 @@ const Goodreads = function(credentials, callbackURL) {
 
     const req = Request.builder()
     .withPath(path)
-    .withResponseKey('reviews')
     .withQueryParams(options)
     .withOAuth(authOptions)
     .build();
@@ -1062,7 +1058,10 @@ const Goodreads = function(credentials, callbackURL) {
     getUsersReviewForBook,
     getUserStatus,
     getUserInfo,
+    getUsersShelves,
     getRecentReviews,
+    getUsersGroups,
+    getGroupInfo,
     getReview,
     addBookToShelf,
     getOwnedBooks,
