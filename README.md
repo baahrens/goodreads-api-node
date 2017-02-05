@@ -31,7 +31,7 @@ Some of those API methods just need your key/secret. To make API calls on behalf
 
 ```js
 // returns all books by an author given the authorID
-goodreads.getBooksByAuthor('175417')
+gr.getBooksByAuthor('175417')
 .then(response => console.log(response));
 ```
 This prints the following result:
@@ -48,7 +48,7 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ```js
 // returns infos about an author
-goodreads.getAuthorInfo(authorID)
+gr.getAuthorInfo(authorID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -64,7 +64,7 @@ goodreads.getAllSeriesByAuthor(authorID)
 
 ```js
 // returns info about the given user
-goodreads.getUserInfo(userID)
+gr.getUserInfo(userID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -72,7 +72,7 @@ goodreads.getUserInfo(userID)
 
 ```js
 // returns the given users shelfs
-goodreads.getUsersShelves(userID)
+gr.getUsersShelves(userID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -80,7 +80,7 @@ goodreads.getUsersShelves(userID)
 
 ```js
 // returns groups of the given user
-goodreads.getUsersGroups(userID)
+gr.getUsersGroups(userID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -88,7 +88,7 @@ goodreads.getUsersGroups(userID)
 
 ```js
 // returns the members of a group
-goodreads.getGroupMembers(groupID)
+gr.getGroupMembers(groupID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -96,7 +96,7 @@ goodreads.getGroupMembers(groupID)
 
 ```js
 // returns page 3 of the search results given the query 'programming'
-goodreads.searchGroups('programming', 3)
+gr.searchGroups('programming', 3)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -104,7 +104,7 @@ goodreads.searchGroups('programming', 3)
 
 ```js
 // returns infos about a group
-goodreads.getGroupInfo('8095')
+gr.getGroupInfo('8095')
 .then(response => { /* do something with the response */ });
 ```
 
@@ -112,14 +112,14 @@ goodreads.getGroupInfo('8095')
 
 ```js
 // returns recent reviews on goodreads
-goodreads.getRecentReviews()
+gr.getRecentReviews()
 .then(response => { /* do something with the response */ });
 ```
 ### getReview(reviewID, [page])
 
 ```js
 // returns a review by ID
-goodreads.getReview(reviewID)
+gr.getReview(reviewID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -127,7 +127,7 @@ goodreads.getReview(reviewID)
 
 ```js
 // returns the review from a user of a given book
-goodreads.getUsersReviewForBook(userID, bookID)
+gr.getUsersReviewForBook(userID, bookID)
 .then(response => { /* do something with the response */ });
 ```
 
@@ -135,7 +135,7 @@ goodreads.getUsersReviewForBook(userID, bookID)
 
 ```js
 // returns recent statuses on goodreads
-goodreads.getRecentStatuses()
+gr.getRecentStatuses()
 .then(response => { /* do something with the response */ });
 ```
 
