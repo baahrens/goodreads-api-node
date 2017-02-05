@@ -40,7 +40,6 @@ const Request = function(builder) {
   this.path = builder.path;
   this.port = builder.port || 80;
   this.queryParams = builder.queryParams || {}
-  this.responseKey = builder.responseKey || '';
   this.access_token = builder.access_token;
   this.access_token_secret = builder.access_token_secret;
   this.oauth = builder.oauth;
@@ -48,10 +47,6 @@ const Request = function(builder) {
 
 Request.prototype.getQueryParams = function() {
   return this.queryParams;
-};
-
-Request.prototype.getResponseKey = function() {
-  return this.responseKey;
 };
 
 Request.prototype.getPort = function() {
