@@ -5,6 +5,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
 const chaiAsPromised = require('chai-as-promised');
+const nock = require('nock');
 chai.use(chaiAsPromised);
 
 describe('goodreads API', function() {
@@ -53,7 +54,7 @@ describe('goodreads API', function() {
       });
 
       it('should return the right data', function(done) {
-        expect(result).to.eventually.have.keys('Request', 'author').notify(done);
+        expect(result).to.eventually.have.keys('books', 'id', 'link', 'name').notify(done);
       });
       it('should reject when no authorID is passed', function(done) {
         const noIdResult = gr.getBooksByAuthor();
