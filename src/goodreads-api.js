@@ -25,6 +25,7 @@ const Goodreads = function(credentials, callbackURL) {
   let ACCESS_TOKEN_SECRET;
   let OAUTH_TOKEN;
   let OAUTH_TOKEN_SECRET;
+  let OAUTHENTICATED = false;
 
 
   /**
@@ -130,6 +131,7 @@ const Goodreads = function(credentials, callbackURL) {
           if (error) reject(new GoodreadsApiError(error.data.split("\n")[0], 'getAccessToken()'));
 
           _setAccessToken({ ACCESS_TOKEN: accessToken, ACCESS_TOKEN_SECRET: accessTokenSecret });
+          OAUTHENTICATED = true;
 
           resolve();
         });
@@ -145,8 +147,10 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {promise}
    */
   function followAuthor(id) {
+    const fn_name = 'followAuthor()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('followAuthor()', 'authorID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/author_followings`;
       const options = { id, format: 'xml' };
@@ -172,8 +176,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function unfollowAuthor(id) {
+    const fn_name = 'unfollowAuthor()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('unfollowAuthor()', 'authorID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/author_followings/${id}`;
       const options = { format: 'xml' };
@@ -199,8 +205,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function showFollowing(id) {
+    const fn_name = 'showFollowings()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('showFollowing()', 'authorFollowingID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorFollowingID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/author_followings/${id}`;
       const options = { format: 'xml' };
@@ -226,8 +234,11 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {promise} returns infos about the following
    */
   function getUserFollowings(id) {
+    const fn_name = 'getUserFollowings()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getUserFollowings()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
+
       const path = `${URL}/user/${id}/following.xml`;
       const options = { key: KEY };
       const authOptions = _getAuthOptions();
@@ -252,8 +263,9 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function getBooksByAuthor(id, page) {
+    const fn_name = 'getBooksByAuthor()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getBooksByAuthor()', 'authorID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorID'));
 
       const path = `${URL}/author/list/${id}`;
       const options = { format: 'xml', key: KEY };
@@ -278,8 +290,9 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns author info if successful
   */
   function getAuthorInfo(id) {
+    const fn_name = 'getAuthorInfo()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getAuthorInfo()', 'authorID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorID'));
 
       const path = `${URL}/author/show/${id}`;
       const options = { key: KEY, format: 'xml' };
@@ -303,8 +316,9 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns all series by author if successful
   */
   function getAllSeriesByAuthor(id) {
+    const fn_name = 'getAllSeriesByAuthor()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getAllSeriesByAuthor()', 'authorID'));
+      if (!id) reject(wrongParamsError(fn_name, 'authorID'));
 
       const path = `${URL}/series/list`;
       const options = {
@@ -333,8 +347,9 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns user info if successful
   */
   function getUserInfo(id) {
+    const fn_name = 'getUserInfo()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getUserInfo()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
 
       const path = `${URL}/user/show/${id}.xml`;
       const options = { key: KEY };
@@ -359,9 +374,11 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {promise}
    */
   function addBookToShelf(book_id, shelf) {
+    const fn_name = 'addBookToShelf()';
     return new Promise((resolve, reject) => {
-      if (!book_id) reject(wrongParamsError('addBookToShelf()', 'bookID'));
-      if (!shelf) reject(wrongParamsError('addBookToShelf()', 'shelfName'));
+      if (!book_id) reject(wrongParamsError(fn_name, 'bookID'));
+      if (!shelf) reject(wrongParamsError(fn_name, 'shelfName'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/shelf/add_to_shelf.xml`;
       const authOptions = _getAuthOptions();
@@ -402,8 +419,9 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns users shelves if successful
   */
   function getUsersShelves(id) {
+    const fn_name = 'getUsersShelves()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getUsersShelves()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
 
       const path = `${URL}/shelf/list.xml`;
       const options = { user_id: id, key: KEY };
@@ -427,8 +445,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function followUser(id) {
+    const fn_name = 'followUser()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('followUser()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/user/${id}/followers`
       const options = { format: 'xml' };
@@ -454,18 +474,24 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns users friend requests if successful
   */
   function getFriendRequests(page) {
-    const path = `${URL}/friend/requests.xml`;
-    const authOptions = _getAuthOptions();
-    const options = {};
-    if (page) options.page = page;
+    const fn_name = 'getFriendRequests()';
+    return Promise((resolve, reject) => {
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      const path = `${URL}/friend/requests.xml`;
+      const authOptions = _getAuthOptions();
+      const options = page ? { page } : {};
 
-    return RequestManager.oAuthGet(req);
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
+
+      RequestManager.oAuthGet(req)
+      .then(res => resolve(res))
+      .catch(err => resolve(err));
+    });
   };
 
   /**
@@ -502,9 +528,11 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function answerFriendRecommendation(id, response) {
+    const fn_name = 'answerFriendRecommendation()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('answerFriendRecommendation()', 'recommendationID'));
-      if (!response) reject(wrongParamsError('answerFriendRecommendation()', 'response'));
+      if (!id) reject(wrongParamsError(fn_name, 'recommendationID'));
+      if (!response) reject(wrongParamsError(fn_name, 'response'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/friend/confirm_recommendation.xml`;
       const options = { id, response };
@@ -531,9 +559,11 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function answerFriendRequest(id, response) {
+    const fn_name = 'answerFriendRequest()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('answerFriendRequest()', 'requestID'));
-      if (!response) reject(wrongParamsError('answerFriendRequest()', 'response'));
+      if (!id) reject(wrongParamsError(fn_name, 'requestID'));
+      if (!response) reject(wrongParamsError(fn_name, 'response'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/friend/confirm_request.xml`;
       const options = { id, response };
@@ -559,8 +589,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function addFriend(id) {
+    const fn_name = 'addFriend()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('addFriend()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/friend/add_as_friend.xml`;
       const options = { id };
@@ -586,8 +618,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function joinGroup(id) {
+    const fn_Name = 'joinGroup()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('joinGroup()', 'groupID'));
+      if (!id) reject(wrongParamsError(fn_name, 'groupID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/group/join`;
       const options = { id };
@@ -718,18 +752,24 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns users notifications if successful
   */
   function getNotifications(page) {
-    const path = `${URL}/notifications.xml`;
-    const authOptions = _getAuthOptions();
-    const options = {};
-    if (page) options.page = page;
+    const fn_name = 'getNotifications()';
+    return new Promise((resolve, reject) => {
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      const path = `${URL}/notifications.xml`;
+      const authOptions = _getAuthOptions();
+      const options = page ? { page } : {};
 
-    return RequestManager.oAuthGet(req);
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
+
+      RequestManager.oAuthGet(req)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+    });
   };
 
   /**
@@ -741,8 +781,10 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns list of books owned by the given user
   */
   function getOwnedBooks(id, page) {
+    const fn_name = 'getOwnedBooks()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('getOwnedBooks()', 'userID'));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
       const path = `${URL}/owned_books/user`;
       const options = { format: 'xml', id };
@@ -769,8 +811,11 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function deleteOwnedBook(id) {
+    const fn_name = 'deleteOwnedBook()';
     return new Promise((resolve, reject) => {
-      if (!id) reject(wrongParamsError('deleteOwnedBook()', 'bookID'));
+      if (!id) reject(wrongParamsError(fn_name, 'bookID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
+
       const path = `${URL}/owned_books/destroy/ID`;
       const options = { id, format: 'xml' };
       const authOptions = _getAuthOptions();
@@ -795,17 +840,25 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function unlikeResource(id) {
-    const path = `${URL}/rating`;
-    const options = { id, format: 'xml' };
-    const authOptions = _getAuthOptions();
+    const fn_name = 'unlikeResource()';
+    return new Promise((resolve, reject) => {
+      if (!id) reject(wrongParamsError(fn_name, 'resourceID'));
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      const path = `${URL}/rating`;
+      const options = { id, format: 'xml' };
+      const authOptions = _getAuthOptions();
 
-    return RequestManager.oAuthPost(req);
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
+
+      RequestManager.oAuthPost(req)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+    });
   };
 
   /**
@@ -835,17 +888,25 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns recommendation to given ID
   */
   function getRecommendation(id) {
-    const path = `${URL}/recommendations/ID`;
-    const options = { id, format: 'xml' };
-    const authOptions = _getAuthOptions();
+    const fn_name = 'getRecommendation()';
+    return new Promise((resolve, reject) => {
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
+      if (!id) reject(wrongParamsError(fn_name, 'recommendationID'));
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      const path = `${URL}/recommendations/ID`;
+      const options = { id, format: 'xml' };
+      const authOptions = _getAuthOptions();
 
-    return RequestManager.oAuthGet(req);
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
+
+      RequestManager.oAuthGet(req)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+    });
   };
 
   /**
@@ -879,25 +940,32 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise} returns books on the given shelf
   */
   function getBooksOnUserShelf(id, shelf, queryOptions) {
-    const path = `${URL}/review/list`;
-    const options = {
-      id,
-      shelf,
-      key: KEY,
-      format: 'xml',
-      ...queryOptions,
-    };
-    const authOptions = _getAuthOptions();
+    const fn_name = 'getBooksOnUserShelf()';
+    return new Promise((resolve, reject) => {
+      if (!OAUTHENTICATED) reject(noOAuthError(fn_name));
+      if (!id) reject(wrongParamsError(fn_name, 'userID'));
+      if (!shelf) reject(wrongParamsError(fn_name, 'shelf'));
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      const path = `${URL}/review/list`;
+      const options = {
+        id,
+        shelf,
+        key: KEY,
+        format: 'xml',
+        ...queryOptions,
+      };
+      const authOptions = _getAuthOptions();
 
-    console.log(req);
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
-    return RequestManager.oAuthGet(req);
+      RequestManager.oAuthGet(req)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+    });
   };
 
   /**
@@ -907,15 +975,19 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {promise} return recent reviews if successful
    */
   function getRecentReviews() {
-    const path = `${URL}/review/recent_reviews.xml`;
-    const options = { key: KEY };
+    return new Promise((resolve, reject) => {
+      const path = `${URL}/review/recent_reviews.xml`;
+      const options = { key: KEY };
 
-    const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      const req = Request.builder()
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
-    return RequestManager.get(req);
+      RequestManager.get(req)
+      .then(res => resolve(res.reviews.review))
+      .catch(err => reject(err));
+    });
   };
 
   /**
