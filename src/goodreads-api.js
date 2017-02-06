@@ -60,11 +60,11 @@ const Goodreads = function(credentials, callbackURL) {
   };
 
   /**
-   * _getOAuthTOken
+   * _getOAuthToken
    *
    * @access private
    */
-  function _getOAuthTOken() {
+  function _getOAuthToken() {
     return { OAUTH_TOKEN, OAUTH_TOKEN_SECRET };
   };
 
@@ -124,7 +124,7 @@ const Goodreads = function(credentials, callbackURL) {
    */
   function getAccessToken() {
     return new Promise((resolve, reject) => {
-      const { OAUTH_TOKEN, OAUTH_TOKEN_SECRET } = _getOAuthTOken();
+      const { OAUTH_TOKEN, OAUTH_TOKEN_SECRET } = _getOAuthToken();
       if (OAUTH_TOKEN && OAUTH_TOKEN_SECRET && OAUTH) {
 
         OAUTH.getOAuthAccessToken(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, 1, (error, accessToken, accessTokenSecret, results) => {

@@ -17,6 +17,7 @@ RequestManager.get = function(req) {
   return new Promise((resolve, reject) => {
     request(path, (error, response, body) => {
       if (error) reject(error);
+      else if (!body) reject();
       else {
         xmlParser.parseString(body, function(err, result) {
           if (err) reject(XMLError(err.error, 'RequestManager.get()'));
