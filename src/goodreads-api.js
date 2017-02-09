@@ -339,7 +339,7 @@ const Goodreads = function(credentials, callbackURL) {
       .withQueryParams(options)
       .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'user');
   };
 
   /**
@@ -403,7 +403,7 @@ const Goodreads = function(credentials, callbackURL) {
     .withQueryParams(options)
     .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'shelves');
   };
 
   /**
@@ -604,7 +604,7 @@ const Goodreads = function(credentials, callbackURL) {
     .withQueryParams(options)
     .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'groups');
   };
 
   /**
@@ -628,7 +628,7 @@ const Goodreads = function(credentials, callbackURL) {
     .withQueryParams(options)
     .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'group_users');
   };
 
   /**
@@ -1037,6 +1037,7 @@ const Goodreads = function(credentials, callbackURL) {
     getRecentReviews,
     getUsersGroups,
     getGroupInfo,
+    getGroupMembers,
     getReview,
     addBookToShelf,
     getOwnedBooks,

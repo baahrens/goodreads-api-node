@@ -88,20 +88,13 @@ describe('goodreads API', function() {
 
       const result = gr.getBooksByAuthor('175417');
 
-      it('should return a promise', function() {
-        return result.should.be.a('promise');
-      });
-
-      it('should resolve given a correct authorID', function() {
-        return result.should.be.fulfilled;
-      });
-
-      it('should resolve an object', function() {
-        return result.should.eventually.be.an('object');
-      });
-
       it('should return the right data', function() {
-        return expect(result).to.eventually.have.keys('books', 'id', 'link', 'name');
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('books', 'id', 'link', 'name'),
+        ]);
       });
 
       it('should reject when no authorID is passed', function() {
@@ -122,20 +115,13 @@ describe('goodreads API', function() {
 
       const result = gr.getAuthorInfo('175417');
 
-      it('should return a promise', function() {
-        return result.should.be.a('promise');
-      });
-
-      it('should resolve given a correct authorID', function() {
-        return result.should.be.fulfilled;
-      });
-
-      it('should resolve an object', function() {
-        return result.should.eventually.be.an('object');
-      });
-
       it('should return the right data', function() {
-        return expect(result).to.eventually.have.keys('books', 'fans_count', 'id', 'link', 'name');
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('books', 'fans_count', 'id', 'link', 'name'),
+        ]);
       });
 
       it('should reject when no authorID is passed', function() {
@@ -156,24 +142,124 @@ describe('goodreads API', function() {
 
       const result = gr.getAllSeriesByAuthor('175417');
 
-      it('should return a promise', function() {
-        return result.should.be.a('promise');
-      });
-
-      it('should resolve given a correct authorID', function() {
-        return result.should.be.fulfilled;
-      });
-
-      it('should resolve an object', function() {
-        return result.should.eventually.be.an('object');
-      });
-
       it('should return the right data', function() {
-        return expect(result).to.eventually.have.keys('series_work');
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('series_work'),
+        ]);
       });
 
       it('should reject when no authorID is passed', function() {
-        const noIdResult = gr.getBooksByAuthor();
+        const noIdResult = gr.getAllSeriesByAuthor();
+        return noIdResult.should.be.rejectedWith(Error);
+      });
+    });
+
+    // getUserInfo
+    describe('getUserInfo', function() {
+      gr = goodreads(credentials);
+      const { path, query, response } = requestData.getUserInfo;
+
+      nock('https://goodreads.com')
+      .get(path)
+      .query(query)
+      .reply(200, response);
+
+      const result = gr.getUserInfo('175417');
+
+      it('should return the right data', function() {
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('id'),
+        ]);
+      });
+
+      it('should reject when no userID is passed', function() {
+        const noIdResult = gr.getUserInfo();
+        return noIdResult.should.be.rejectedWith(Error);
+      });
+    });
+    
+    // getUsersShelves
+    describe('getUsersShelves', function() {
+      gr = goodreads(credentials);
+      const { path, query, response } = requestData.getUsersShelves;
+
+      nock('https://goodreads.com')
+      .get(path)
+      .query(query)
+      .reply(200, response);
+
+      const result = gr.getUsersShelves('175417');
+
+      it('should return the right data', function() {
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('user_shelf'), ]);
+      });
+
+      it('should reject when no userID is passed', function() {
+        const noIdResult = gr.getUsersShelves();
+        return noIdResult.should.be.rejectedWith(Error);
+      });
+    });
+    
+    // getUsersGroups
+    describe('getUsersGroups', function() {
+      gr = goodreads(credentials);
+      const { path, query, response } = requestData.getUsersGroups;
+
+      nock('https://goodreads.com')
+      .get(path)
+      .query(query)
+      .reply(200, response);
+
+      const result = gr.getUsersGroups('175417');
+
+      it('should return the right data', function() {
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('user', 'list'),
+        ]);
+      });
+
+      it('should reject when no userID is passed', function() {
+        const noIdResult = gr.getUsersGroups();
+        return noIdResult.should.be.rejectedWith(Error);
+      });
+    });
+    
+    // getGroupMembers
+    describe('getGroupMembers', function() {
+      gr = goodreads(credentials);
+      const { path, query, response } = requestData.getGroupMembers;
+
+      nock('https://goodreads.com')
+      .get(path)
+      .query(query)
+      .reply(200, response);
+
+      const result = gr.getGroupMembers('12345');
+
+      it('should return the right data', function() {
+        return Promise.all([
+          result.should.be.a('promise'),
+          result.should.be.fulfilled,
+          result.should.eventually.be.an('object'),
+          result.should.eventually.have.keys('group_user'),
+        ]);
+      });
+
+      it('should reject when no userID is passed', function() {
+        const noIdResult = gr.getGroupMembers();
         return noIdResult.should.be.rejectedWith(Error);
       });
     });
