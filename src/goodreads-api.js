@@ -1,10 +1,8 @@
 const OAuth = require('oauth').OAuth;
 const Request = require('./base-request');
 const { GoodreadsApiError, noOAuthError, wrongParamsError, logWarning } = require('./goodreads-error');
-const RequestManager = require('./goodreads-request');
 const parseXML = require('./xml-parser');
 const { get, oAuthGet, oAuthPost, oAuthDelete } = require('./goodreads-request');
-
 
 /**
  * Goodreads
@@ -118,7 +116,7 @@ const Goodreads = function(credentials, callbackURL) {
   function getRequestToken() {
     return new Promise((resolve, reject) => {
 
-      if (!OAUTH) reject(noOAuthError('getRequestToken()'));
+      if (!OAUTH) initOAuth();
 
       OAUTH.getOAuthRequestToken((error, oAuthToken, oAuthTokenSecret, results) => {
         if (error) reject(new GoodreadsApiError(error.message, 'getRequestToken()'));
@@ -296,7 +294,7 @@ const Goodreads = function(credentials, callbackURL) {
     .withQueryParams(options)
     .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'author');
   };
 
   /**
@@ -318,7 +316,7 @@ const Goodreads = function(credentials, callbackURL) {
     .withQueryParams(options)
     .build();
 
-    return _execute(get, req);
+    return _execute(get, req, 'series_works');
   };
 
 
@@ -1025,6 +1023,8 @@ const Goodreads = function(credentials, callbackURL) {
     initOAuth,
     getRequestToken,
     getAccessToken,
+    _setOAuthToken,
+    _setAccessToken,
     getBooksByAuthor,
     getAuthorInfo,
     getAllSeriesByAuthor,
@@ -1049,4 +1049,4 @@ const Goodreads = function(credentials, callbackURL) {
   };
 };
 
-exports = module.exports = Goodreads;
+module.exports = exports = Goodreads;
