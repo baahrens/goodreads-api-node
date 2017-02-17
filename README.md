@@ -44,29 +44,30 @@ This prints the following result:
 ```
 You can pass an optional `page` parameter specifying the result page you want to get.
 
-### getAuthorInfo(authorID) 
+##### getAuthorInfo(authorID) 
 
-### getAllSeriesByAuthor(authorID)
+##### getAllSeriesByAuthor(authorID)
 
-### getUserInfo(userID)
+##### getUserInfo(userID)
 
-### getUsersShelves(userID)
+##### getUsersShelves(userID)
 
-### getUsersGroups(userID, [sort])
+##### getUsersGroups(userID, [sort])
 
-### getGroupMembers(groupID, [params])
+##### getGroupMembers(groupID, [params])
 
-### searchGroups(query, [page])
+##### searchGroups(query, [page])
 
-### getGroupInfo(groupID, [params])
+##### getGroupInfo(groupID, [params])
 
-### getRecentReviews()
+##### getRecentReviews()
 
-### getReview(reviewID, [page])
+##### getReview(reviewID, [page])
 
-### getUsersReviewForBook(userID, bookID)
+##### getUsersReviewForBook(userID, bookID)
 
-### getRecentStatuses()
+##### getRecentStatuses()
+
 
 
 ## OAuth authentication and methods
@@ -74,7 +75,10 @@ You can pass an optional `page` parameter specifying the result page you want to
   If you want to make requests on behalf of your user (e.g. them marking a book as 'read') you need to get their permission.
   The Goodreads API uses OAuth for this.
 
-  For this to work properly you have to either pass a callbackURL to the goodreads function or call `initOauth(callbackURL)` after calling `goodreads()`;
+  There are two ways to initialize the oauth process. 
+  You can either pass a callbackURL to  the `goodreads()` function (which then calls `initOauth()` for you) or you just call `gr.initOauth()` after setting up your credentials. The callbackURL is not required for oauth to work, it's just used for goodreads to be able to redirect your user after granting/denying access.
+  
+  
   ```js
   // set callbackURL together with your key/secret
   const gr = goodreads(myCredentials, callbackURL);
@@ -109,42 +113,43 @@ You can pass an optional `page` parameter specifying the result page you want to
    
   That's it! You can now use the following methods:
 
-### followAuthor(authorID)
+##### followAuthor(authorID)
 
-### unfollowAuthor(authorID)
+##### unfollowAuthor(authorID)
 
-### showFollowing(followingID)
+##### showFollowing(followingID)
 
-### getUserFollowings(userID)
+##### getUserFollowings(userID)
 
-### addBooksToShelf(bookID, shelfName)
+##### addBooksToShelf(bookID, shelfName)
 
-### followUser(userID)
+##### followUser(userID)
 
-### getRecommendation(recommendationID)
+##### getRecommendation(recommendationID)
 
-### getFriendRequests([page])
+##### getFriendRequests([page])
 
-### answerFriendRecommendation(recommendationID, response)
+##### answerFriendRecommendation(recommendationID, response)
 
-### answerFriendRequest(requestID, response)
+##### answerFriendRequest(requestID, response)
 
-### addFriend(userID)
+##### addFriend(userID)
 
-### joinGroup(groupID)
+##### joinGroup(groupID)
 
-### getNotifications([page])
+##### getNotifications([page])
 
-### getOwnedBooks(userID, [page])
+##### getOwnedBooks(userID, [page])
 
-### deleteOwnedBook(bookID)
+##### deleteOwnedBook(bookID)
 
-### unlikeResource(resourceID)
+##### unlikeResource(resourceID)
 
-### deleteReview(reviewID)
+##### deleteReview(reviewID)
 
-### getBooksOnUserShelf(userID, shelfName, [queryOptions])
+##### getBooksOnUserShelf(userID, shelfName, [queryOptions])
  
+
 
 ## Tests
 
