@@ -93,11 +93,11 @@ You can pass an optional `page` parameter specifying the result page you want to
   ```
 
   After this you should be able to call `getRequestToken()` to obtain a requestToken.
-  You need the requestToken to inform your user about your app wanting to make request with his account.
+  You need the requestToken to inform your user about your app wanting to make requests with his account.
 
   ```js
   gr.getRequestToken()
-  .then(url => { /* */ });
+  .then(url => { /* redirect your user to this url to ask for permission */ });
   ```
   `getRequestToken()` returns (a promise which resolves) a URL. You can now redirect your user to this URL to ask him for access to his account.
   The callbackURL provided in `initOauth()` is then used to inform you about whether the user granted access.
