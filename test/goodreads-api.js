@@ -29,7 +29,9 @@ describe('goodreads API', function() {
     expect(gr.KEY).to.be.undefined;
     expect(gr.SECRET).to.be.undefined;
     expect(gr._getAuthOptions).to.be.undefined;
+    expect(gr._getAccessToken).to.be.undefined;
   });
+
   describe('getRequestToken', function() {
     gr = goodreads(credentials);
 
@@ -66,7 +68,7 @@ describe('goodreads API', function() {
       return promise.should.be.rejected;
     });
 
-    it('should get the accessToken if there is a oAuthToken', function() {
+    it('should get the accessToken if there is an oAuthToken', function() {
       gr.initOAuth();
       gr._setOAuthToken({ OAUTH_TOKEN: "TOKEN", OAUTH_TOKEN_SECRET: "SECRET" });
       const promise = gr.getAccessToken();

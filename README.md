@@ -12,7 +12,7 @@ const goodreads = require('goodreads-api-node');
 
 ## Usage
 
-You need to register your app to get a goodreads developer key: https://www.goodreads.com/api/keys
+You need to register your app to get a [goodreads developer key](https://www.goodreads.com/api/keys)
 With the developer key and secret you can now call `goodreads()`. This will return an object which exposes the API methods.
 
 ```js
@@ -32,7 +32,7 @@ Some of those API methods just need your key/secret. To make API calls on behalf
 ```js
 // returns all books by an author given the authorID
 gr.getBooksByAuthor('175417')
-.then(response => console.log(response));
+.then(console.log);
 ```
 This prints the following result:
 ```js
@@ -46,102 +46,104 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ### getAuthorInfo(authorID) 
 
-```js
-// returns infos about an author
-gr.getAuthorInfo(authorID)
-.then(response => { /* do something with the response */ });
-```
-
 ### getAllSeriesByAuthor(authorID)
 
-```js
-// returns series the given author has worked on
-goodreads.getAllSeriesByAuthor(authorID)
-.then(response => { /* do something with the response */ });
-```
 ### getUserInfo(userID)
-
-
-```js
-// returns info about the given user
-gr.getUserInfo(userID)
-.then(response => { /* do something with the response */ });
-```
 
 ### getUsersShelves(userID)
 
-```js
-// returns the given users shelfs
-gr.getUsersShelves(userID)
-.then(response => { /* do something with the response */ });
-```
-
 ### getUsersGroups(userID, [sort])
-
-```js
-// returns groups of the given user
-gr.getUsersGroups(userID)
-.then(response => { /* do something with the response */ });
-```
 
 ### getGroupMembers(groupID, [params])
 
-```js
-// returns the members of a group
-gr.getGroupMembers(groupID)
-.then(response => { /* do something with the response */ });
-```
-
 ### searchGroups(query, [page])
-
-```js
-// returns page 3 of the search results given the query 'programming'
-gr.searchGroups('programming', 3)
-.then(response => { /* do something with the response */ });
-```
 
 ### getGroupInfo(groupID, [params])
 
-```js
-// returns infos about a group
-gr.getGroupInfo('8095')
-.then(response => { /* do something with the response */ });
-```
-
 ### getRecentReviews()
 
-```js
-// returns recent reviews on goodreads
-gr.getRecentReviews()
-.then(response => { /* do something with the response */ });
-```
 ### getReview(reviewID, [page])
-
-```js
-// returns a review by ID
-gr.getReview(reviewID)
-.then(response => { /* do something with the response */ });
-```
 
 ### getUsersReviewForBook(userID, bookID)
 
-```js
-// returns the review from a user of a given book
-gr.getUsersReviewForBook(userID, bookID)
-.then(response => { /* do something with the response */ });
-```
-
 ### getRecentStatuses()
 
-```js
-// returns recent statuses on goodreads
-gr.getRecentStatuses()
-.then(response => { /* do something with the response */ });
-```
 
 ## OAuth authentication and methods
 
- - coming soon
+  If you want to make requests on behalf of your user (e.g. them marking a book as 'read') you need to get their permission.
+  The Goodreads API uses OAuth for this.
+
+  For this to work properly you have to either pass a callbackURL to the goodreads function or call `initOauth(callbackURL)` after calling `goodreads()`;
+  ```js
+  // set callbackURL together with your key/secret
+  const gr = goodreads(myCredentials, callbackURL);
+
+  // or call initOauth(callbackURL) after setting up your key/secret
+  const gr = goodreads(myCredentials)
+  gr.initOauth(callbackURL);
+  ```
+
+  After this you should be able to call `getRequestToken()` to obtain a requestToken.
+  You need the requestToken to inform your user about your app wanting to make request with his account.
+
+  ```js
+  gr.getRequestToken()
+  .then(url => { /* */ });
+  ```
+  `getRequestToken()` returns (a promise which resolves) a URL. You can now redirect your user to this URL to ask him for access to his account.
+  The callbackURL provided in `initOauth()` is then used to inform you about whether the user granted access.
+  Goodreads will redirect to this url with the query params `oauth_token` and `authorize`.
+  
+  `http://yourapp.com/goodreads_oauth_callback?oauth_token=ezBHZc7C1SwvLGc646PEQ&authorize=1`
+
+  For further information about the goodreads OAuth process: [Goodreads API Documentation](https://www.goodreads.com/api/documentation#oauth)
+  
+
+  If the user granted access you can now request an accessToken from the goodreadsAPI.
+  
+  ```js
+  gr.getAccessToken()
+  .then(() => { /* you can now make authenticated requests */ });
+  ```
+   
+  That's it! You can now use the following methods:
+
+### followAuthor(authorID)
+
+### unfollowAuthor(authorID)
+
+### showFollowing(followingID)
+
+### getUserFollowings(userID)
+
+### addBooksToShelf(bookID, shelfName)
+
+### followUser(userID)
+
+### getRecommendation(recommendationID)
+
+### getFriendRequests([page])
+
+### answerFriendRecommendation(recommendationID, response)
+
+### answerFriendRequest(requestID, response)
+
+### addFriend(userID)
+
+### joinGroup(groupID)
+
+### getNotifications([page])
+
+### getOwnedBooks(userID, [page])
+
+### deleteOwnedBook(bookID)
+
+### unlikeResource(resourceID)
+
+### deleteReview(reviewID)
+
+### getBooksOnUserShelf(userID, shelfName, [queryOptions])
  
 
 ## Tests
@@ -149,6 +151,6 @@ gr.getRecentStatuses()
  - coming soon
  
  
-## contribution
+## Contribute
 
  - coming soon
