@@ -1,5 +1,9 @@
-# goodreads-api-node
 A Goodreads API wrapper for node.js
+
+![Goodreads](https://s.gr-assets.com/assets/press/thumbnail_logo-a0e66b2e27d2b52773b0ddab4e10ea4a.jpg)
+
+
+
 
 ## Installation
 
@@ -150,11 +154,6 @@ You can pass an optional `page` parameter specifying the result page you want to
 ##### getBooksOnUserShelf(userID, shelfName, [queryOptions])
  
 
-
-## Tests
-
- - coming soon
- 
  
 ## Contribute
 
