@@ -1,5 +1,5 @@
 
-const Builder = function(){
+const Builder = function() {
   let responseKey, queryParams, port, path, oauth, access_token, access_token_secret;
 };
 

@@ -1037,10 +1037,39 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {promise} returns author object if successful
    */
   function searchAuthors(authorName) {
-    if (!authorName || authorName === '') return Promise.reject(wrongParamsError('searchAuthors()', 'userID'));
+    if (!authorName) return Promise.reject(wrongParamsError('searchAuthors()', 'userID'));
 
     const path = `${URL}/api/author_url/${authorName}`;
     const options = { key: KEY };
+
+    const req = Request.builder()
+    .withPath(path)
+    .withQueryParams(options)
+    .build();
+
+    return _execute(get, req);
+  };
+
+  /**
+   * showBook
+   *
+   * @access public
+   * @param {string} bookID the bookID to search for
+   * @returns {promise} returns book
+   */
+  function showBook(bookId, params = {}) {
+    const fn_name = 'showBook()';
+
+    if (!bookId) return Promise.reject(wrongParamsError(fn_name, 'bookID'));
+
+    const path = `${URL}/book/show.xml`;
+    const options = {
+      format: 'xml',
+      id: bookId,
+      key: KEY,
+      ...params
+    };
+    const authOptions = _getAuthOptions();
 
     const req = Request.builder()
     .withPath(path)
@@ -1076,6 +1105,7 @@ const Goodreads = function(credentials, callbackURL) {
     followAuthor,
     unfollowAuthor,
     showFollowing,
+    showBook,
     getUserFollowings,
   };
 };
