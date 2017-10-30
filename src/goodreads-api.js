@@ -79,15 +79,9 @@ const Goodreads = function(credentials, callbackURL) {
 
 
   function _execute(fn, req, responseKey) {
-    return new Promise((resolve, reject) => {
-      fn(req)
-      .then(parseXML)
-      .then(res => {
-        if (responseKey) resolve(res.GoodreadsResponse[responseKey]);
-        else resolve(res.GoodreadsResponse);
-      })
-      .catch(reject);
-    });
+    return fn(req)
+    .then(parseXML)
+    .then(res => responseKey ? res.GoodreadsResponse[responseKey] : res.GoodreadsResponse)
   };
 
   /**
