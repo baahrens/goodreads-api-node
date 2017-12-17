@@ -872,7 +872,6 @@ const Goodreads = function(credentials, callbackURL) {
   function getBooksOnUserShelf(id, shelf, queryOptions) {
     const fn_name = 'getBooksOnUserShelf()';
 
-    if (!OAUTHENTICATED) return Promise.reject(noOAuthError(fn_name));
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'userID'));
     if (!shelf) return Promise.reject(wrongParamsError(fn_name, 'shelf'));
 
@@ -884,15 +883,13 @@ const Goodreads = function(credentials, callbackURL) {
       format: 'xml',
       ...queryOptions,
     };
-    const authOptions = _getAuthOptions();
 
     const req = Request.builder()
     .withPath(path)
     .withQueryParams(options)
-    .withOAuth(authOptions)
     .build();
 
-    return _execute(oAuthGet, req);
+    return _execute(get, req);
   };
 
   /**
