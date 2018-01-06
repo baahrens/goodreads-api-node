@@ -80,16 +80,16 @@ You can pass an optional `page` parameter specifying the result page you want to
   The Goodreads API uses OAuth for this.
 
   There are two ways to initialize the oauth process. 
-  You can either pass a callbackURL to  the `goodreads()` function (which then calls `initOauth()` for you) or you just call `gr.initOauth()` after setting up your credentials. The callbackURL is not required for oauth to work, it's just used for goodreads to be able to redirect your user after granting/denying access.
+  You can either pass a callbackURL to  the `goodreads()` function (which then calls `initOAuth()` for you) or you just call `gr.initOAuth()` after setting up your credentials. The callbackURL is not required for oauth to work, it's just used for goodreads to be able to redirect your user after granting/denying access.
   
   
   ```js
   // set callbackURL together with your key/secret
   const gr = goodreads(myCredentials, callbackURL);
 
-  // or call initOauth(callbackURL) after setting up your key/secret
+  // or call initOAuth(callbackURL) after setting up your key/secret
   const gr = goodreads(myCredentials)
-  gr.initOauth(callbackURL);
+  gr.initOAuth(callbackURL);
   ```
 
   After this you should be able to call `getRequestToken()` to obtain a requestToken.
@@ -100,7 +100,7 @@ You can pass an optional `page` parameter specifying the result page you want to
   .then(url => { /* redirect your user to this url to ask for permission */ });
   ```
   `getRequestToken()` returns (a promise which resolves) a URL. You can now redirect your user to this URL to ask him for access to his account.
-  The callbackURL provided in `initOauth()` is then used to inform you about whether the user granted access.
+  The callbackURL provided in `initOAuth()` is then used to inform you about whether the user granted access.
   Goodreads will redirect to this url with the query params `oauth_token` and `authorize`.
   
   `http://yourapp.com/goodreads_oauth_callback?oauth_token=ezBHZc7C1SwvLGc646PEQ&authorize=1`
