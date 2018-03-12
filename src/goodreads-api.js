@@ -153,6 +153,33 @@ const Goodreads = function(credentials, callbackURL) {
   };
 
   /**
+   * setAccessToken - call this if you have a key-pair saved from a previous
+   * session.
+   *
+   * @access public
+   */
+  function setAccessToken({token, secret}) {
+    _setAccessToken({
+      ACCESS_TOKEN: token,
+      ACCESS_TOKEN_SECRET: secret
+    });
+    OAUTHENTICATED = true;
+  }
+
+  /**
+   * dumpAccessToken - call this to get ahold of the key-pair to save it
+   * for future sessions.
+   *
+   * @access public
+   */
+  function dumpAccessToken({ token, secret }) {
+    return {
+      token: ACCESS_TOKEN,
+      secret: ACCESS_TOKEN_SECRET
+    };
+  }
+
+  /**
    * followAuthor
    *
    * @access public
@@ -1083,6 +1110,8 @@ const Goodreads = function(credentials, callbackURL) {
     initOAuth,
     getRequestToken,
     getAccessToken,
+    setAccessToken,
+    dumpAccessToken,
     _setOAuthToken,
     getBooksByAuthor,
     getAuthorInfo,
