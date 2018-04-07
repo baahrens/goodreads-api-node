@@ -48,7 +48,7 @@ This prints the following result:
 ```
 You can pass an optional `page` parameter specifying the result page you want to get.
 
-##### getAuthorInfo(authorID) 
+##### getAuthorInfo(authorID)
 
 ##### getAllSeriesByAuthor(authorID)
 
@@ -79,10 +79,10 @@ You can pass an optional `page` parameter specifying the result page you want to
   If you want to make requests on behalf of your user (e.g. them marking a book as 'read') you need to get their permission.
   The Goodreads API uses OAuth for this.
 
-  There are two ways to initialize the oauth process. 
+  There are two ways to initialize the oauth process.
   You can either pass a callbackURL to  the `goodreads()` function (which then calls `initOAuth()` for you) or you just call `gr.initOAuth()` after setting up your credentials. The callbackURL is not required for oauth to work, it's just used for goodreads to be able to redirect your user after granting/denying access.
-  
-  
+
+
   ```js
   // set callbackURL together with your key/secret
   const gr = goodreads(myCredentials, callbackURL);
@@ -102,20 +102,22 @@ You can pass an optional `page` parameter specifying the result page you want to
   `getRequestToken()` returns (a promise which resolves) a URL. You can now redirect your user to this URL to ask him for access to his account.
   The callbackURL provided in `initOAuth()` is then used to inform you about whether the user granted access.
   Goodreads will redirect to this url with the query params `oauth_token` and `authorize`.
-  
+
   `http://yourapp.com/goodreads_oauth_callback?oauth_token=ezBHZc7C1SwvLGc646PEQ&authorize=1`
 
   For further information about the goodreads OAuth process: [Goodreads API Documentation](https://www.goodreads.com/api/documentation#oauth)
-  
+
 
   If the user granted access you can now request an accessToken from the goodreadsAPI.
-  
+
   ```js
   gr.getAccessToken()
   .then(() => { /* you can now make authenticated requests */ });
   ```
-   
+
   That's it! You can now use the following methods:
+
+##### getCurrentUserInfo()
 
 ##### followAuthor(authorID)
 
@@ -152,9 +154,9 @@ You can pass an optional `page` parameter specifying the result page you want to
 ##### deleteReview(reviewID)
 
 ##### getBooksOnUserShelf(userID, shelfName, [queryOptions])
- 
 
- 
+
+
 ## Contribute
 
  - coming soon
