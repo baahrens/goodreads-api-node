@@ -72,6 +72,9 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ##### getRecentStatuses()
 
+##### showBook(bookID)
+
+
 
 
 ## OAuth authentication and methods
