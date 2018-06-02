@@ -206,7 +206,7 @@ const Goodreads = function(credentials, callbackURL) {
   * @returns {promise}
   */
   function showFollowing(id) {
-    const fn_name = 'showFollowings()';
+    const fn_name = 'showFollowing()';
 
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'authorFollowingID'));
     if (!OAUTHENTICATED) return Promise.reject(noOAuthError(fn_name));
