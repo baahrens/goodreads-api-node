@@ -92,7 +92,7 @@ const Goodreads = function(credentials, callbackURL) {
    * @returns {undefined}
    */
   function initOAuth(callbackURL) {
-    if (!callbackURL) logWarning('Warning: You have passed no callbackURL.', 'initOauth()');
+    if (!callbackURL) logWarning('Warning: You have passed no callbackURL.', 'initOAuth()');
 
     const requestURL = `${URL}/oauth/request_token`;
     const accessURL = `${URL}/oauth/access_token`;
