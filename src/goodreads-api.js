@@ -1073,6 +1073,75 @@ const Goodreads = function(credentials, callbackURL) {
     return _execute(get, req);
   };
 
+  /**
+   * bookIDToWorkID
+   *
+   * @access public
+   * @param {string} bookID to get work ids
+   * @returns {promise} returns contains work IDs without any markup
+   */
+  function bookIDToWorkID(bookID) {
+    if (!bookID) return Promise.reject(wrongParamsError('bookIDToWorkID()', 'bookID'));
+
+    const path = `${URL}/book/id_to_work_id/${bookID}`;
+    const options = { key: KEY };
+
+    const req = Request.builder()
+    .withPath(path)
+    .withQueryParams(options)
+    .build();
+
+    return _execute(get, req);
+  };
+
+  /**
+  * seriesWorkIsIn
+  *
+  * @access public
+  * @param {string} workID work ID
+  * @returns {promise} returns list of all series a work is in
+  */
+  function seriesWorkIsIn(workID) {
+    if (!workID) return Promise.reject(wrongParamsError('seriesWorkIsIn()', 'workID'));
+
+    const path = `${URL}/work/${workID}/series`;
+    const options = {
+      format: 'xml',
+      key: KEY
+    };
+    const req = Request.builder()
+    .withPath(path)
+    .withQueryParams(options)
+    .build();
+
+    return _execute(get, req);
+  };
+
+  /**
+  * getSeries
+  *
+  * @access public
+  * @param {string} seriesID series ID
+  * @returns {promise} returns Info on a series
+  */
+  function getSeries(seriesID) {
+    if (!seriesID) return Promise.reject(wrongParamsError('getSeries', 'seriesID'));
+
+    const path = `${URL}/series/show/${seriesID}`;
+    const options = {
+      format: 'xml',
+      key: KEY
+    };
+
+    const req = Request.builder()
+    .withPath(path)
+    .withQueryParams(options)
+    .build();
+    return _execute(get, req);
+  };
+
+
+
   return {
     initOAuth,
     getRequestToken,
@@ -1101,6 +1170,9 @@ const Goodreads = function(credentials, callbackURL) {
     showFollowing,
     showBook,
     getUserFollowings,
+    bookIDToWorkID,
+    seriesWorkIsIn,
+    getSeries,
   };
 };
 
