@@ -74,8 +74,12 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ##### showBook(bookID)
 
-
-
+#### searchBooks([params]);
+  #### @param {object} params q: query, page: page of results, field: one of 'title', 'author' or 'all' (default)
+  #### Example Usage:
+  ```js
+    const res = await goodreads.searchBooks( { q: 'A song of ice and fire', page: 2, field: 'title' } );
+  ```
 
 ## OAuth authentication and methods
 
