@@ -74,6 +74,12 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ##### showBook(bookID)
 
+##### bookIDtoWorkID(bookId)
+
+##### getSeries(seriesID)
+
+##### getSeriesByWork(workID)
+
 #### searchBooks([params]);
   #### @param {object} params q: query, page: page of results, field: one of 'title', 'author' or 'all' (default)
   #### Example Usage:
@@ -162,7 +168,7 @@ You can pass an optional `page` parameter specifying the result page you want to
 
 ##### getBooksOnUserShelf(userID, shelfName, [queryOptions])
 
-
+##### getCurrentUserInfo()
 
 ## Contribute
 
