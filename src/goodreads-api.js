@@ -80,8 +80,8 @@ const Goodreads = function(credentials, callbackURL) {
 
   function _execute(fn, req, responseKey) {
     return fn(req)
-    .then(parseXML)
-    .then(res => responseKey ? res.GoodreadsResponse[responseKey] : res.GoodreadsResponse)
+      .then(parseXML)
+      .then(res => responseKey ? res.GoodreadsResponse[responseKey] : res.GoodreadsResponse)
   };
 
   /**
@@ -164,21 +164,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * unfollowAuthor
-  *
-  * @access public
-  * @param {string} authorID
-  * @returns {promise}
-  */
+   * unfollowAuthor
+   *
+   * @access public
+   * @param {string} authorID
+   * @returns {promise}
+   */
   function unfollowAuthor(id) {
     const fn_name = 'unfollowAuthor()';
 
@@ -190,21 +190,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthDelete, req);
   };
 
   /**
-  * showFollowing
-  *
-  * @access public
-  * @param {string} author followingID
-  * @returns {promise}
-  */
+   * showFollowing
+   *
+   * @access public
+   * @param {string} author followingID
+   * @returns {promise}
+   */
   function showFollowing(id) {
     const fn_name = 'showFollowing()';
 
@@ -216,10 +216,10 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
@@ -242,21 +242,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
-/**
-  * getBooksByAuthor
-  *
-  * @access public
-  * @param {string} authorID {number} page (optional)
-  * @returns {promise}
-  */
+  /**
+   * getBooksByAuthor
+   *
+   * @access public
+   * @param {string} authorID {number} page (optional)
+   * @returns {promise}
+   */
   function getBooksByAuthor(id, page) {
     const fn_name = 'getBooksByAuthor()';
 
@@ -267,20 +267,20 @@ const Goodreads = function(credentials, callbackURL) {
     if (page) options.page = page;
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build()
+      .withPath(path)
+      .withQueryParams(options)
+      .build()
 
     return _execute(get, req, 'author');
   };
 
   /**
-  * getInfo
-  *
-  * @access public
-  * @param {string} id author ID
-  * @returns {promise} returns author info if successful
-  */
+   * getInfo
+   *
+   * @access public
+   * @param {string} id author ID
+   * @returns {promise} returns author info if successful
+   */
   function getAuthorInfo(id) {
     const fn_name = 'getAuthorInfo()';
 
@@ -290,20 +290,20 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, format: 'xml' };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'author');
   };
 
   /**
-  * getAllSeries
-  *
-  * @access public
-  * @param {string} id author ID
-  * @returns {promise} returns all series by author if successful
-  */
+   * getAllSeries
+   *
+   * @access public
+   * @param {string} id author ID
+   * @returns {promise} returns all series by author if successful
+   */
   function getAllSeriesByAuthor(id) {
     const fn_name = 'getAllSeriesByAuthor()';
 
@@ -313,21 +313,21 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { id, key: KEY, format: 'xml' };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'series_works');
   };
 
 
   /**
-  * getInfo
-  *
-  * @access public
-  * @param {string} id user ID
-  * @returns {promise} returns user info if successful
-  */
+   * getInfo
+   *
+   * @access public
+   * @param {string} id user ID
+   * @returns {promise} returns user info if successful
+   */
   function getUserInfo(id) {
     const fn_name = 'getUserInfo()';
 
@@ -337,9 +337,9 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'user');
   };
@@ -364,10 +364,10 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { book_id, name: shelf };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     _execute(oAuthPost, req);
   }
@@ -379,21 +379,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _excute(oAuthPost, req);
   };
 
   /**
-  * getShelves
-  *
-  * @access public
-  * @param {string} id user ID
-  * @returns {promise} returns users shelves if successful
-  */
+   * getShelves
+   *
+   * @access public
+   * @param {string} id user ID
+   * @returns {promise} returns users shelves if successful
+   */
   function getUsersShelves(id) {
     const fn_name = 'getUsersShelves()';
 
@@ -403,20 +403,20 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { user_id: id, key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'shelves');
   };
 
   /**
-  * followUser
-  *
-  * @access public
-  * @param {string} id user ID
-  * @returns {promise}
-  */
+   * followUser
+   *
+   * @access public
+   * @param {string} id user ID
+   * @returns {promise}
+   */
   function followUser(id) {
     const fn_name = 'followUser()';
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'userID'));
@@ -427,21 +427,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
   /**
-  * getFriendRequests
-  *
-  * @access public
-  * @param {number} page optional page
-  * @returns {promise} returns users friend requests if successful
-  */
+   * getFriendRequests
+   *
+   * @access public
+   * @param {number} page optional page
+   * @returns {promise} returns users friend requests if successful
+   */
   function getFriendRequests(page) {
     const fn_name = 'getFriendRequests()';
     if (!OAUTHENTICATED) return Promise.reject(noOAuthError(fn_name));
@@ -451,46 +451,46 @@ const Goodreads = function(credentials, callbackURL) {
     const options = page ? { page } : {};
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
   /**
-  * createComment
-  * TODO
-  *
-  * @access public
-  * @param {string} type
-  * @param {string} id
-  * @param {string} comment comment to create
-  * @returns {promise}
-  */
+   * createComment
+   * TODO
+   *
+   * @access public
+   * @param {string} type
+   * @param {string} id
+   * @param {string} comment comment to create
+   * @returns {promise}
+   */
   function createComment(type, id, comment) {
     const path = `${URL}/comment.xml`;
     const options = { type, id, comment };
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * answerFriendRecommendation
-  *
-  * @access public
-  * @param {string} id recommendation ID
-  * @param {string} response response to recommendation ('y' or 'n')
-  * @returns {promise}
-  */
+   * answerFriendRecommendation
+   *
+   * @access public
+   * @param {string} id recommendation ID
+   * @param {string} response response to recommendation ('y' or 'n')
+   * @returns {promise}
+   */
   function answerFriendRecommendation(id, response) {
     const fn_name = 'answerFriendRecommendation()';
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'recommendationID'));
@@ -502,22 +502,22 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * answerFriendRequest
-  *
-  * @access public
-  * @param {string} id request ID
-  * @param {string} response response to request ('y' or 'n')
-  * @returns {promise}
-  */
+   * answerFriendRequest
+   *
+   * @access public
+   * @param {string} id request ID
+   * @param {string} response response to request ('y' or 'n')
+   * @returns {promise}
+   */
   function answerFriendRequest(id, response) {
     const fn_name = 'answerFriendRequest()';
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'requestID'));
@@ -529,21 +529,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * addFriend
-  *
-  * @access public
-  * @param {string} id user ID
-  * @returns {promise}
-  */
+   * addFriend
+   *
+   * @access public
+   * @param {string} id user ID
+   * @returns {promise}
+   */
   function addFriend(id) {
     const fn_name = 'addFriend()';
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'userID'));
@@ -554,21 +554,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     var req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * joinGroup
-  *
-  * @access public
-  * @param {string} id group ID
-  * @returns {promise}
-  */
+   * joinGroup
+   *
+   * @access public
+   * @param {string} id group ID
+   * @returns {promise}
+   */
   function joinGroup(id) {
     const fn_Name = 'joinGroup()';
     if (!id) return Promise.reject(wrongParamsError(fn_name, 'groupID'));
@@ -579,23 +579,23 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     var req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * getUsersGroups
-  * TODO
-  *
-  * @access public
-  * @param {string} id userID
-  * @param {string} sort sort groups by
-  * @returns {promise} returns groups if successful
-  */
+   * getUsersGroups
+   * TODO
+   *
+   * @access public
+   * @param {string} id userID
+   * @param {string} sort sort groups by
+   * @returns {promise} returns groups if successful
+   */
   function getUsersGroups(id, sort) {
     if (!id) return Promise.reject(wrongParamsError('getUsersGroups()', 'groupID'));
 
@@ -605,23 +605,23 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'groups');
   };
 
   /**
-  * getGroupMembers
-  *
-  * @access public
-  * @param {string} id group ID
-  * @param {string} sort sort members by
-  * @param {number} page optional page
-  * @param {string} query search members by
-  * @returns {promise} returns group members if successful
-  */
+   * getGroupMembers
+   *
+   * @access public
+   * @param {string} id group ID
+   * @param {string} sort sort members by
+   * @param {number} page optional page
+   * @param {string} query search members by
+   * @returns {promise} returns group members if successful
+   */
   function getGroupMembers(id, params) {
     if (!id) return Promise.reject(wrongParamsError('getGroupMembers()', 'groupID'));
 
@@ -629,42 +629,42 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, ...params };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'group_users');
   };
 
   /**
-  * searchGroups
-  *
-  * @access public
-  * @param {string} query search query
-  * @param {number} page optional page
-  * @returns {promise} returns groups matching the query
-  */
+   * searchGroups
+   *
+   * @access public
+   * @param {string} query search query
+   * @param {number} page optional page
+   * @returns {promise} returns groups matching the query
+   */
   function searchGroups(query, page) {
     if (!query) return Promise.reject(wrongParamsError('searchGroups()', 'search query'));
     const path = `${URL}/group/search.xml`;
     const options = { page, key: KEY, q: query };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getGroupInfo
-  *
-  * @access public
-  * @param {string} id group ID
-  * @param {object} params {string} sort, {order} 'a' or 'd'
-  * @returns {promise} returns group info if successful
-  */
+   * getGroupInfo
+   *
+   * @access public
+   * @param {string} id group ID
+   * @param {object} params {string} sort, {order} 'a' or 'd'
+   * @returns {promise} returns group info if successful
+   */
   function getGroupInfo(id, params) {
     if (!id) return Promise.reject(wrongParamsError('getGroupInfo()', 'groupID'));
 
@@ -672,20 +672,20 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, ...params };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getNotifications
-  *
-  * @access public
-  * @param {string} page optional page
-  * @returns {promise} returns users notifications if successful
-  */
+   * getNotifications
+   *
+   * @access public
+   * @param {string} page optional page
+   * @returns {promise} returns users notifications if successful
+   */
   function getNotifications(page) {
     const fn_name = 'getNotifications()';
 
@@ -696,22 +696,22 @@ const Goodreads = function(credentials, callbackURL) {
     const options = page ? { page } : {};
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
   /**
-  * getOwnedBooks
-  *
-  * @access public
-  * @param {string} id user ID
-  * @param {number} page optional page of results
-  * @returns {promise} returns list of books owned by the given user
-  */
+   * getOwnedBooks
+   *
+   * @access public
+   * @param {string} id user ID
+   * @param {number} page optional page of results
+   * @returns {promise} returns list of books owned by the given user
+   */
   function getOwnedBooks(id, page) {
     const fn_name = 'getOwnedBooks()';
 
@@ -724,21 +724,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
   /**
-  * deleteOwnedBook
-  *
-  * @access public
-  * @param {string} id book ID
-  * @returns {promise}
-  */
+   * deleteOwnedBook
+   *
+   * @access public
+   * @param {string} id book ID
+   * @returns {promise}
+   */
   function deleteOwnedBook(id) {
     const fn_name = 'deleteOwnedBook()';
 
@@ -750,21 +750,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * unlikeResource
-  *
-  * @access public
-  * @param {string} id ressource ID
-  * @returns {promise}
-  */
+   * unlikeResource
+   *
+   * @access public
+   * @param {string} id ressource ID
+   * @returns {promise}
+   */
   function unlikeResource(id) {
     const fn_name = 'unlikeResource()';
 
@@ -776,21 +776,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthPost, req);
   };
 
   /**
-  * getReadStatus
-  *
-  * @access public
-  * @param {string} id status ID
-  * @returns {promise} returns read status if successful
-  */
+   * getReadStatus
+   *
+   * @access public
+   * @param {string} id status ID
+   * @returns {promise} returns read status if successful
+   */
   function getReadStatus(id) {
     if (!id) return Promise.reject(wrongParamsError('getReadStatus()', 'statusID'));
 
@@ -798,20 +798,20 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, format: 'xml' };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getRecommendation
-  *
-  * @access public
-  * @param {string} id recommendation ID
-  * @returns {promise} returns recommendation to given ID
-  */
+   * getRecommendation
+   *
+   * @access public
+   * @param {string} id recommendation ID
+   * @returns {promise} returns recommendation to given ID
+   */
   function getRecommendation(id) {
     const fn_name = 'getRecommendation()';
 
@@ -823,21 +823,21 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
 
   /**
-  * deleteReview
-  *
-  * @access public
-  * @param {string} id review ID
-  * @returns {promise}
-  */
+   * deleteReview
+   *
+   * @access public
+   * @param {string} id review ID
+   * @returns {promise}
+   */
   function deleteReview(id) {
     if (!id) return Promise.reject(wrongParamsError('deleteReview()', 'reviewID'));
 
@@ -846,23 +846,23 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthDelete, req);
   };
 
   /**
-  * getBooksOnUserShelf
-  *
-  * @access public
-  * @param {string} id user ID
-  * @param {string} shelf name of users shelf
-  * @param {object} queryOptions object with properties: sort {string}, query {string}, oder {'a' or 'd'}, page {number}, per_page {number, 1-200}
-  * @returns {promise} returns books on the given shelf
-  */
+   * getBooksOnUserShelf
+   *
+   * @access public
+   * @param {string} id user ID
+   * @param {string} shelf name of users shelf
+   * @param {object} queryOptions object with properties: sort {string}, query {string}, oder {'a' or 'd'}, page {number}, per_page {number, 1-200}
+   * @returns {promise} returns books on the given shelf
+   */
   function getBooksOnUserShelf(id, shelf, queryOptions) {
     const fn_name = 'getBooksOnUserShelf()';
 
@@ -881,10 +881,10 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .withOAuth(authOptions)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .withOAuth(authOptions)
+      .build();
 
     return _execute(oAuthGet, req);
   };
@@ -900,21 +900,21 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getReview
-  *
-  * @access public
-  * @param {string} id review ID
-  * @param {number} page optional page of results
-  * @returns {promise} returns review if successful
-  */
+   * getReview
+   *
+   * @access public
+   * @param {string} id review ID
+   * @param {number} page optional page of results
+   * @returns {promise} returns review if successful
+   */
   function getReview(id, page) {
     if (!id) return Promise.reject(wrongParamsError('getReview()', 'reviewID'));
 
@@ -922,21 +922,21 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { id, page, key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getUsersReviewForBook
-  *
-  * @access public
-  * @param {string} user_id user ID
-  * @param {string} book_id book ID
-  * @returns {promise} returns given users review for the given book
-  */
+   * getUsersReviewForBook
+   *
+   * @access public
+   * @param {string} user_id user ID
+   * @param {string} book_id book ID
+   * @returns {promise} returns given users review for the given book
+   */
   function getUsersReviewForBook(user_id, book_id) {
     const fn_name = 'getUsersReviewForBooks()';
 
@@ -947,20 +947,20 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { user_id, book_id, key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getById
-  *
-  * @access public
-  * @param {string} id user status ID
-  * @returns {promise} returns status if successful
-  */
+   * getById
+   *
+   * @access public
+   * @param {string} id user status ID
+   * @returns {promise} returns status if successful
+   */
   function getUserStatus(id) {
     if (!id) return Promise.reject(wrongParamsError('getUserStatus()', 'userID'));
 
@@ -968,25 +968,25 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, format: 'xml' };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
 
   /**
-  * getRecentStatuses
-  *
-  * @access public
-  * @returns {promise} returns recents statuses if successful
-  */
+   * getRecentStatuses
+   *
+   * @access public
+   * @returns {promise} returns recents statuses if successful
+   */
   function getRecentStatuses() {
     const path = `${URL}/user_status/index.xml`;
 
     const req = Request.builder()
-    .withPath(path)
-    .build();
+      .withPath(path)
+      .build();
 
     return _execute(get, req, 'updates');
   };
@@ -997,9 +997,9 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, ...params }
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req, 'events');
   };
@@ -1016,9 +1016,9 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY, ...params };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
@@ -1037,9 +1037,9 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
@@ -1066,9 +1066,9 @@ const Goodreads = function(credentials, callbackURL) {
     const authOptions = _getAuthOptions();
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
@@ -1087,9 +1087,9 @@ const Goodreads = function(credentials, callbackURL) {
     const options = { key: KEY };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
@@ -1110,9 +1110,9 @@ const Goodreads = function(credentials, callbackURL) {
       key: KEY
     };
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
 
     return _execute(get, req);
   };
@@ -1134,13 +1134,29 @@ const Goodreads = function(credentials, callbackURL) {
     };
 
     const req = Request.builder()
-    .withPath(path)
-    .withQueryParams(options)
-    .build();
+      .withPath(path)
+      .withQueryParams(options)
+      .build();
+    
     return _execute(get, req);
   };
 
+  /**
+  * getCurrentUserInfo
+  *
+  * @access public
+  * @returns {promise}
+  */
+  function getCurrentUserInfo() {
+    const fn_name = 'getCurrentUserInfo()';
+    if (!OAUTHENTICATED) return Promise.reject(noOAuthError(fn_name));
 
+    const path = URL + '/api/auth_user';
+    const authOptions = _getAuthOptions();
+    const req = Request.builder().withPath(path).withOAuth(authOptions).build();
+
+    return _execute(oAuthGet, req);
+  };
 
   return {
     initOAuth,
@@ -1150,6 +1166,7 @@ const Goodreads = function(credentials, callbackURL) {
     getBooksByAuthor,
     getAuthorInfo,
     getAllSeriesByAuthor,
+    getCurrentUserInfo,
     getRecentStatuses,
     getBooksOnUserShelf,
     getUsersReviewForBook,
