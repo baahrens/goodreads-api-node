@@ -1120,7 +1120,7 @@ const Goodreads = function(credentials, callbackURL) {
   };
 
   /**
-   * seriesWorkIsIn
+   * getSeriesByWork
    *
    * @access public
    * @param {string} workID work ID
@@ -1189,7 +1189,7 @@ const Goodreads = function(credentials, callbackURL) {
     showBook,
     getUserFollowings,
     bookIDToWorkID,
-    seriesWorkIsIn,
+    getSeriesByWork,
     getSeries,
   };
 };
