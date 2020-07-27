@@ -1,6 +1,6 @@
 {
   "name": "goodreads-api-node",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "homepage": "https://github.com/baahrens/goodreads-api-node",
   "description": "Node.js wrapper for the Goodreads web API",
   "files": [
